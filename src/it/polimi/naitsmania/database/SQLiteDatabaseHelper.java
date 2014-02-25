@@ -3,6 +3,7 @@ package it.polimi.naitsmania.database;
 import it.polimi.naitsmania.database.MainActivity.gender;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import android.R.integer;
@@ -22,8 +23,13 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper{
 
 	private float maxValue = 0;
 	public Cursor tobesaved;
+	private ArrayList<String> allPlacesList = new ArrayList<String>();
 	
 	
+	public ArrayList<String> getAllPlacesList() {
+		return allPlacesList;
+	}
+
 	public SQLiteDatabaseHelper(Context context, String name,
 			CursorFactory factory, int version) {
 		super(context, name, factory, version);
@@ -57,11 +63,18 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper{
     
     public void showResults(){
     	SQLiteDatabase database = this.getReadableDatabase();
-		Cursor cur = database.rawQuery("SELECT id as _id, gender, minAgeSection, maxAgeSection, place, vote FROM 'tableee';", new String[]{});
-		Cursor curAvg = database.rawQuery("SELECT AVG(vote), place as _id FROM tableee GROUP BY place", new String[]{});
-		cur.moveToFirst();
-		curAvg.moveToFirst();
-		while (!curAvg.isLast()) {
+		//Cursor cur = database.rawQuery("SELECT id as _id, gender, minAgeSection, maxAgeSection, place, vote FROM 'tableee';", new String[]{});
+		//Cursor curAvg = database.rawQuery("SELECT AVG(vote), place as _id FROM tableee GROUP BY place", new String[]{});
+		Cursor allPlaces = database.rawQuery("SELECT place FROM tableee", new String[]{}); 
+		allPlaces.moveToFirst();
+		int i = 0;
+		while (!allPlaces.isLast()) {
+			allPlacesList.add(allPlaces.getString(i));
+			i++;
+		}
+		//cur.moveToFirst();
+		//curAvg.moveToFirst();
+		/*while (!curAvg.isLast()) {
 			Log.w("asd", String.valueOf(curAvg.getFloat(0)) + " " + curAvg.getString(1));
 			if (curAvg.getFloat(0) > maxValue){
 				tobesaved = curAvg;
@@ -72,7 +85,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper{
 		while(!cur.isLast()){
 			Log.w("tag", String.valueOf(cur.getInt(0) + " " + cur.getString(1) + " " + cur.getInt(2) + " " + cur.getInt(3) + " " + cur.getString(4) + " " + cur.getInt(5)));
 			cur.moveToNext();
-		}
+		}*/
     }
     
     public String getResourceURI(){

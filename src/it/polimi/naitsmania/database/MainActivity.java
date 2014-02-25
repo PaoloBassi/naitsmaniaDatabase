@@ -30,6 +30,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	// List of all places
+	private ArrayList<String> allPlaces = new ArrayList<String>();
+	
 	// Debugging
 	private static final String TAG = "BluetoothChat";
 	private static final boolean D = true;
@@ -137,11 +140,14 @@ public class MainActivity extends Activity {
 			db.insertAll(i, gender, min, max, place, num);
 		}
 
-		/*db.showResults();
-		String pageToBeLoad = db.getResourceURI();
-		Uri uri = Uri.parse("http://naitsmania.com/" + pageToBeLoad);
-		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		startActivity(intent);*/
+		// compute the query for finding the places
+		db.showResults();
+		// allPlaces contais all the places
+		allPlaces = db.getAllPlacesList();
+		for (int i = 0; i < allPlaces.size(); i++) {
+			System.out.println(allPlaces.get(i));
+		}
+		
 
 		// BLUETOOTH ONCREATE
 		if (D)
