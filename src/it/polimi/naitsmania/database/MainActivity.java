@@ -148,6 +148,10 @@ public class MainActivity extends Activity {
 			System.out.println(allPlaces.get(i));
 		}
 		
+		for(int i=0;i<4;i++) {
+			readMessageArray.add(allPlaces.get(i));
+		}
+		
 
 		// BLUETOOTH ONCREATE
 		if (D)
@@ -248,8 +252,8 @@ public class MainActivity extends Activity {
 		blueButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Send button item to myplaces.
-
+				// Send button item to the mobilephones
+				sendMessage(blueButton.getText().toString());
 			}
 		});
 
@@ -258,6 +262,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Send button item to myplaces.
+				sendMessage(redButton.getText().toString());
 
 			}
 		});
@@ -266,7 +271,7 @@ public class MainActivity extends Activity {
 		greenButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				sendMessage(greenButton.getText().toString());
 			}
 		});
 
@@ -274,7 +279,7 @@ public class MainActivity extends Activity {
 		yellowButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				sendMessage(yellowButton.getText().toString());
 			}
 		});
 
