@@ -22,7 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class DeviceListActivity extends Activity {
-	 // Debugging
+    // Debugging
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
 
@@ -42,14 +42,13 @@ public class DeviceListActivity extends Activity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.device_list);
 
-        // Set result CANCELED in case the user backs out
+        // Set result CANCELED incase the user backs out
         setResult(Activity.RESULT_CANCELED);
 
         // Initialize the button to perform device discovery
         Button scanButton = (Button) findViewById(R.id.button_scan);
         scanButton.setOnClickListener(new OnClickListener() {
-            @Override
-			public void onClick(View v) {
+            public void onClick(View v) {
                 doDiscovery();
                 v.setVisibility(View.GONE);
             }
@@ -133,8 +132,7 @@ public class DeviceListActivity extends Activity {
 
     // The on-click listener for all devices in the ListViews
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
-        @Override
-		public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
+        public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
             // Cancel discovery because it's costly and we're about to connect
             mBtAdapter.cancelDiscovery();
 
@@ -178,4 +176,5 @@ public class DeviceListActivity extends Activity {
             }
         }
     };
+
 }
